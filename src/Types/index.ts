@@ -1,4 +1,4 @@
-type NyTimesArticle = {
+interface NyTimesArticle {
   abstract: string;
   adx_keywords: string;
   asset_id: number;
@@ -20,6 +20,18 @@ type NyTimesArticle = {
   updated: string;
   uri: string;
   url: string;
-};
+}
 
-export { NyTimesArticle };
+interface NyTimesApiResponse {
+  status: string;
+  copyright: string;
+  num_results: number;
+  results: Array<{
+    id: number;
+    title: string;
+    published_date: string;
+    url: string;
+  }>;
+}
+
+export type { NyTimesArticle, NyTimesApiResponse };

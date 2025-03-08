@@ -1,26 +1,54 @@
-import globals from "globals";
-import pluginJs from "@eslint/js";
-import tseslint from "typescript-eslint";
-import pluginReact from "eslint-plugin-react";
+import tseslint from "@typescript-eslint/eslint-plugin";
+import tsparser from "@typescript-eslint/parser";
+import react from "eslint-plugin-react";
 
 /** @type {import('eslint').Linter.Config[]} */
 export default [
-  { files: ["**/*.{js,mjs,cjs,ts,jsx,tsx}"] },
-  { languageOptions: { globals: globals.browser } },
-  pluginJs.configs.recommended,
-  ...tseslint.configs.recommended,
-  pluginReact.configs.flat.recommended,
   {
+    ignores: ["dist/*", "node_modules/*"]
+  },
+  {
+    files: ["**/*.{js,jsx,ts,tsx}"],
+    languageOptions: {
+      ecmaVersion: 2022,
+      sourceType: "module",
+      parser: tsparser,
+      parserOptions: {
+        ecmaFeatures: {
+          jsx: true
+        }
+      }
+    },
+    plugins: {
+      "@typescript-eslint": tseslint,
+      react
+    },
     settings: {
       react: {
-        version: "detect", // ✅ Auto-detect React version
-      },
+        version: "detect"
+      }
     },
     rules: {
-      "react/react-in-jsx-scope": "off", // ✅ Fix: No need to import React in JSX
-      "react/jsx-uses-react": "off", // ✅ Prevents React import requirement
+      // Base ESLint rules
+      "no-unused-vars": "off",
+      "no-console": "warn",
+
+      // TypeScript rules
+      "@typescript-eslint/no-unused-vars": "warn",
+      "@typescript-eslint/no-var-requires": "error",
+      "@typescript-eslint/consistent-type-definitions": ["error", "interface"],
+      "@typescript-eslint/explicit-function-return-type": ["warn", {
+        allowExpressions: true,
+        allowTypedFunctionExpressions: true
+      }],
+      "@typescript-eslint/no-explicit-any": "warn",
+
+      // React rules
+      "react/prop-types": "off",
+      "react/react-in-jsx-scope": "off",
+      "react/jsx-uses-react": "off",
       "react/jsx-uses-vars": "warn",
-      "no-unused-vars": "warn",
-    },
-  },
+      "react/jsx-no-undef": "error"
+    }
+  }
 ];

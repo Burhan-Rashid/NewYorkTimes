@@ -4,7 +4,7 @@ import NyTimesListView from "./components/NyTimesListView";
 
 const queryClient = new QueryClient();
 
-function App() {
+function App(): JSX.Element {
   return (
     <QueryClientProvider client={queryClient}>
       <Routes>

@@ -1,11 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { NyTimesMostPopularArticlesApi } from "../../Api";
-import { NyTimesArticle } from "../../Types";
 import ErrorPage from "../ErrorPage";
 import Loader from "../Loader";
 
-function NyTimesListView() {
+function NyTimesListView(): JSX.Element {
   const [duration, setDuration] = useState<number>(1);
 
   const { data, isLoading, isError, error } = useQuery({
@@ -21,6 +20,10 @@ function NyTimesListView() {
 
   if (isError) {
     return <ErrorPage errorMessage={error.message} />;
+  }
+
+  if (!data?.results) {
+    return <ErrorPage errorMessage="No data available" />;
   }
 
   return (
@@ -41,7 +44,7 @@ function NyTimesListView() {
       </div>
 
       <ul className="divide-y divide-gray-300 px-8 pt-20">
-        {data.results.map((article: NyTimesArticle) => (
+        {data.results.map((article) => (
           <li
             key={article.id}
             className="py-4 flex justify-between items-center"
@@ -54,7 +57,7 @@ function NyTimesListView() {
             </div>
             <button
               onClick={() => window.open(article.url, "_blank")}
-              className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 cursor-pointer  whitespace-nowrap"
+              className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 cursor-pointer whitespace-nowrap"
             >
               Read Article
             </button>
