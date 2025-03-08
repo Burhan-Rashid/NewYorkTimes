@@ -1,12 +1,61 @@
-# React + Vite
+# NY Times Most Popular Articles
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React application that displays the most popular articles from the New York Times API. Built with React, TypeScript, Vite, and TailwindCSS.
 
-Currently, two official plugins are available:
+## Installation
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Install all dependencies:
 
-## Expanding the ESLint configuration
+```bash
+npm install
+```
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Available Commands
+
+### Development
+
+```bash
+npm run dev
+```
+Starts the development server at http://localhost:3000 with hot-reload enabled.
+
+### Production Build
+
+```bash
+npm run build
+```
+Creates a production-ready build in the `dist` directory, with optimized and minified assets.
+
+### Preview Production Build
+
+```bash
+npm run preview
+```
+Locally preview the production build before deploying.
+
+### Linting
+
+```bash
+# Run ESLint
+npm run lint
+
+# Fix auto-fixable ESLint issues
+npm run lint:fix
+```
+Checks/fixes code style and identifies potential issues using ESLint.
+
+### Testing
+
+```bash
+# Run tests in watch mode
+npm test
+
+# Run tests with coverage report
+npm run test:coverage
+
+# Run tests with UI
+npm run test:ui
+```
+Executes unit and integration tests using Vitest.
+
+
